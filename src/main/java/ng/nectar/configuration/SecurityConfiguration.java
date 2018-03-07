@@ -1,4 +1,4 @@
-package com.codebyamir.configuration;
+package ng.nectar.configuration;
 
 import javax.sql.DataSource;
 
@@ -47,6 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/register").permitAll()
 			.antMatchers("/confirm").permitAll()
 			.antMatchers("/login").permitAll()
+			.antMatchers("/location").permitAll()
+			.antMatchers("/puSpecify").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 			.authenticated().and().csrf().disable().formLogin()
 			.loginPage("/login").failureUrl("/login?error=true")

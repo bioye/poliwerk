@@ -1,4 +1,4 @@
-package com.codebyamir.model;
+package ng.nectar.model;
 
 import java.util.Set;
 
@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
-import com.codebyamir.model.Role;
+import ng.nectar.model.Role;
 
 @Entity
 @Table(name = "user")
@@ -26,7 +26,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	//@Column(name = "user_id")
 	private int id;
 	
 	@Column(name = "email", nullable = false, unique = true)
@@ -59,7 +59,16 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+	@javax.persistence.Transient
+	private Location location;
 
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}	
 
 	public int getActive() {
 		return active;
@@ -69,14 +78,13 @@ public class User {
 		this.active = active;
 	}
 	
-public Set<Role> getRoles() {
-	return roles;
-}
-
-public void setRoles(Set<Role> roles) {
-	this.roles = roles;
-}
-
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 	
 	public String getConfirmationToken() {
 		return confirmationToken;
@@ -86,12 +94,11 @@ public void setRoles(Set<Role> roles) {
 		this.confirmationToken = confirmationToken;
 	}
 
-
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setuserId(int id) {
 		this.id = id;
 	}
 
@@ -134,6 +141,4 @@ public void setRoles(Set<Role> roles) {
 	public void setEnabled(boolean value) {
 		this.enabled = value;
 	}
-
-
 }

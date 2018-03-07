@@ -1,9 +1,9 @@
-package com.codebyamir.repository;
+package ng.nectar.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.codebyamir.model.Role;
+import ng.nectar.model.Role;
 
 
 @Repository("roleRepository")

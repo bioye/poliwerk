@@ -1,4 +1,4 @@
-package com.codebyamir.service;
+package ng.nectar.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

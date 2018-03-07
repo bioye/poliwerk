@@ -1,4 +1,4 @@
-package com.codebyamir.controller;
+package ng.nectar.controller;
 
 import java.util.Map;
 import java.util.UUID;
@@ -19,11 +19,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.codebyamir.model.User;
-import com.codebyamir.service.EmailService;
-import com.codebyamir.service.UserService;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
+
+import ng.nectar.model.FedConstituency;
+import ng.nectar.model.LocalGovernment;
+import ng.nectar.model.PollingUnit;
+import ng.nectar.model.SenatorialDistrict;
+import ng.nectar.model.State;
+import ng.nectar.model.StateConstituency;
+import ng.nectar.model.User;
+import ng.nectar.model.Ward;
+import ng.nectar.service.EmailService;
+import ng.nectar.service.PuService;
+import ng.nectar.service.UserService;
 
 @Controller
 public class RegisterController {
@@ -31,19 +40,92 @@ public class RegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private UserService userService;
 	private EmailService emailService;
+	private PuService puService;
 	
 	@Autowired
 	public RegisterController(BCryptPasswordEncoder bCryptPasswordEncoder,
-			UserService userService, EmailService emailService) {
+			UserService userService, EmailService emailService, PuService puService) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;
 		this.emailService = emailService;
+		this.puService = puService;
 	}
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/location", method = RequestMethod.GET)
+	public ModelAndView location(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("latLng", "");
+		modelAndView.addObject("latitude", "");
+		modelAndView.addObject("longitude", "");
+		modelAndView.setViewName("location");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/location", method = RequestMethod.POST)
+	public ModelAndView processLocation(ModelAndView modelAndView, BindingResult bindingResult, HttpServletRequest request) {
+		//extract coords
+		//save to User.Location
+		//find polling unit
+		//display constituencies
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/puSpecify", method = RequestMethod.GET)
+	public ModelAndView puSpecify(){
+		//load pollingUnit
+		//
+		ModelAndView modelAndView = new ModelAndView();
+		//modelAndView.addObject("pu", "");//
+		//modelAndView.addObject("puCode", "");
+		modelAndView.setViewName("puSpecify");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/puSpecify", method = RequestMethod.POST)
+	public ModelAndView processPuSpecify(ModelAndView modelAndView, @RequestParam(required=false,name="puCode") String code){
+		//load pollingUnit
+		//PollingUnit pu = puService.findByCode(puService.puToCode(code));
+		PollingUnit pu = puService.findByCode(puService.puToStoredCode(code));
+		if(null!=pu) {
+			modelAndView.addObject("code", code);
+			modelAndView.addObject("puDesc", pu.getDescription());
+			Ward ward = pu.getWard();
+			if(null!=ward) {
+				modelAndView.addObject("ward", ward.getName());
+				StateConstituency stateConst=ward.getStateConst();
+				if(null!=stateConst) modelAndView.addObject("stateConst", stateConst.getName());
+				FedConstituency fedConst=ward.getFedConst();
+				if(null!=fedConst) modelAndView.addObject("fedConst", fedConst.getName());
+				SenatorialDistrict senate=ward.getDistrict();
+				if(null!=senate) modelAndView.addObject("senatorial", senate.getName());
+				LocalGovernment lg = ward.getLg();
+				if(null!=lg) {
+					modelAndView.addObject("lg", lg.getName());
+					State state = lg.getState();
+					if(null!=state) {
+						modelAndView.addObject("state", state.getName());
+					}
+				}
+			}
+		}
+		else {
+			modelAndView.addObject("puNotExistsMessage", "The provided polling unit code["+ code+"] does not match any existing Polling Unit in the INEC Database.");
+		}
+		modelAndView.setViewName("/puSpecify");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="admin/location", method = RequestMethod.GET)
+	public ModelAndView adminLocation(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/location");
 		return modelAndView;
 	}
 	
@@ -98,6 +180,18 @@ public class RegisterController {
 		}
 			
 		return modelAndView;
+	}
+	
+	// Process confirmation link
+	@RequestMapping(value="/pu", method = RequestMethod.GET)
+	public ModelAndView displayPollingUnit(ModelAndView modelAndView, @RequestParam("id") String id) {
+		//office name
+		//current office holder
+		//name
+		//passport photo
+			
+		modelAndView.setViewName("pu");
+		return modelAndView;		
 	}
 	
 	// Process confirmation link

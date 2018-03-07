@@ -1,4 +1,4 @@
-package com.codebyamir.service;
+package ng.nectar.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -6,10 +6,10 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codebyamir.model.Role;
-import com.codebyamir.model.User;
-import com.codebyamir.repository.RoleRepository;
-import com.codebyamir.repository.UserRepository;
+import ng.nectar.model.Role;
+import ng.nectar.model.User;
+import ng.nectar.repository.RoleRepository;
+import ng.nectar.repository.UserRepository;
 
 @Service("userService")
 public class UserService {

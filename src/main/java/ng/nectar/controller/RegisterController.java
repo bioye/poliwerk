@@ -54,6 +54,7 @@ public class RegisterController {
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("title", "Project Nectar - Login");
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}

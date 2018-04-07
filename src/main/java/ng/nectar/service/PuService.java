@@ -66,7 +66,7 @@ public class PuService {
 	}
 	
 	public String getStatePrefix(String stateCode) {
-		State state = stateRepository.findOne(Integer.parseInt(stateCode));
+		State state = stateRepository.findByCode(stateCode);
 		//System.out.println("stateCode="+stateCode);
 		//System.out.println("state="+state);
 		if(null==state) return null;

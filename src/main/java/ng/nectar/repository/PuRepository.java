@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import ng.nectar.model.PollingUnit;
 
+
 @Repository("puRepository")
-public interface PuRepository extends JpaRepository<PollingUnit, Long> {
+public interface PuRepository extends JpaRepository<PollingUnit, Integer> {
 	 PollingUnit findByCode(String code);
 	 PollingUnit findByPuLocation(String loc_id);
 }

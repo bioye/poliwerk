@@ -9,8 +9,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ward")
-public class Ward implements Constituency{
+public class Ward implements Constituency{	
 
+	public int getId() {
+		return id;
+	}
 	public SenatorialDistrict getDistrict() {
 		return district;
 	}

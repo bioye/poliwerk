@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +35,7 @@ import ng.nectar.model.Ward;
 import ng.nectar.service.EmailService;
 import ng.nectar.service.PuService;
 import ng.nectar.service.UserService;
+import ng.nectar.service.WardService;
 
 @Controller
 public class RegisterController {
@@ -41,14 +44,16 @@ public class RegisterController {
 	private UserService userService;
 	private EmailService emailService;
 	private PuService puService;
+	private WardService wardService;
 	
 	@Autowired
 	public RegisterController(BCryptPasswordEncoder bCryptPasswordEncoder,
-			UserService userService, EmailService emailService, PuService puService) {
+			UserService userService, EmailService emailService, PuService puService, WardService wardService) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;
 		this.emailService = emailService;
 		this.puService = puService;
+		this.wardService = wardService;
 	}
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
@@ -84,8 +89,23 @@ public class RegisterController {
 		//
 		ModelAndView modelAndView = new ModelAndView();
 		//modelAndView.addObject("pu", "");//
-		//modelAndView.addObject("puCode", "");
+		modelAndView.addObject("puCode", "");
 		modelAndView.setViewName("puSpecify");
+		return modelAndView;
+	}
+
+	@GetMapping("/ward/{id}")
+	public ModelAndView ward(@PathVariable Integer id){
+		Ward ward = wardService.getWard(id);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("code", ward.getCode());
+		modelAndView.addObject("name", ward.getName());
+		modelAndView.addObject("lg", ward.getLg().getName());
+		modelAndView.addObject("stateConst", ward.getStateConst().getName());
+		modelAndView.addObject("state", ward.getLg().getState().getName());
+		modelAndView.addObject("fedConst", ward.getFedConst().getName());
+		modelAndView.addObject("district", ward.getDistrict().getName());
+		modelAndView.setViewName("ward");
 		return modelAndView;
 	}
 
@@ -100,6 +120,7 @@ public class RegisterController {
 			Ward ward = pu.getWard();
 			if(null!=ward) {
 				modelAndView.addObject("ward", ward.getName());
+				modelAndView.addObject("wardId", ward.getId());
 				StateConstituency stateConst=ward.getStateConst();
 				if(null!=stateConst) modelAndView.addObject("stateConst", stateConst.getName());
 				FedConstituency fedConst=ward.getFedConst();

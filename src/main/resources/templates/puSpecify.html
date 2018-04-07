@@ -38,8 +38,7 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-user"></span>
           </span>
-			<input type="text" id="puCode" name="puCode" th:placeholderx="Polling Unit"
-				class="form-control" /> 
+			<input type="text" id="puCode" name="puCode" th:placeholder="Polling_Unit" class="form-control" />
           <span class="glyphicon form-control-feedback"
             aria-hidden="true"></span>			
         </div>
@@ -51,8 +50,7 @@
 			<b>Polling Unit Code:</b>
 				<a href="pu.html" th:href="@{/pu(id=${code})}"><span th:text="${code}"></span></a><br /> 
 			<b>Polling Unit Description:</b><span th:text="${puDesc}"></span><br />
-			<b>Ward:</b>
-				<a href="ward.html" th:href="@{/ward/{ward}}"><span th:text="${ward}"></span></a><br />
+			<b>Ward:</b><a href="ward.html" th:href="@{/ward/{wardId}(wardId=${wardId})}"><span th:text="${ward}"></span></a><br />
 			<b>Local Government:</b> <span th:text="${lg}"></span><br />
 			<b>State Constituency:</b> <span th:text="${stateConst}"></span><br />
 			<b>Federal Constituency:</b> <span th:text="${fedConst}"></span><br />

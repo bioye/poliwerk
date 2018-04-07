@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <!-- <head th:fragment="head(title, links, scripts)"> -->
+  <head th:fragment="head(title, links)">
+  <!-- <head th:fragment="head"> -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{css/layout.css}" rel="stylesheet" />
+	<script th:src="@{js/layout.js}"></script>
+    <!--/* Per-page placeholder for additional scripts */-->
+    <!-- <th:block th:replace="${scripts}" /> -->
+	<!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${links}" />
+    <!-- <title th:text="${title}">Template</title> -->
+    <title th:replace="${title}">Template</title>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- <div class="navbar-collapse collapse"> -->
+        <nav>
+		  <ul id='menu'>
+		    <li><a class='home' href='/'>HOME</a></li>
+		    <li><a class='prett' href='#' title='Menu'>OFFICIALS</a>
+		      <ul class='menus'>
+		        <li><a href='#' title='Dropdown 1'>President</a></li>
+		        <li><a href='#' title='Dropdown 2'>Senators</a></li>
+		        <li><a href='#' title='Dropdown 3'>Representatives</a></li>
+		        <li><a href='#' title='Dropdown 1'>Governors</a></li>
+		        <li><a href='#' title='Dropdown 2'>Honourables</a></li>
+		        <li><a href='#' title='Dropdown 3'>Chairmen</a></li>
+		        <li><a href='#' title='Dropdown 3'>Councillors</a></li>
+		      </ul>
+		    </li>
+		    <li><a class='home' href='/'>ELECTIONS</a></li>
+		    <li><a class='home' href='/'>MAP</a></li>
+		    <li><a class='home' href='/'>SEARCH</a></li>
+		    <li><a class='home' href='/'>MY LOCATION</a></li>
+		    <li><a class='home' href='/'>register</a></li>
+		    <li><a class='home' href='/'>login</a></li>
+		    <li><a class='home' href='/'>logout</a></li>
+		  </ul>
+		</nav>
+		
+          <ul class="nav navbar-nav navbar-right">
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;register
+              </a>
+            </li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;login
+              </a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+              <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;logout
+              </a>
+             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+            </li>
+          </ul>
+        <!-- </div> -->
+      </div>
+    </div>
+  </body>
+</html>

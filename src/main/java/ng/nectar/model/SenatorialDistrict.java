@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "senate")
-public class SenatorialDistrict implements Constituency {
+public class SenatorialDistrict implements ConstituencyInterface {
 
 	public String getCode() {
 		return code;

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fedconst")
-public class FedConstituency implements Constituency{
+public class FedConstituency implements ConstituencyInterface{
 
 	public String getCode() {
 		return code;

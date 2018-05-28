@@ -85,27 +85,17 @@ public class RegisterController {
 
 	@RequestMapping(value="/puSpecify", method = RequestMethod.GET)
 	public ModelAndView puSpecify(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findByEmail(auth.getName());
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		PollingUnit pu = user.getPu();
+		if(null!=pu) modelAndView = helpPuSpecify(modelAndView, pu);
 		//load pollingUnit
 		//
-		ModelAndView modelAndView = new ModelAndView();
 		//modelAndView.addObject("pu", "");//
 		modelAndView.addObject("puCode", "");
 		modelAndView.setViewName("puSpecify");
-		return modelAndView;
-	}
-
-	@GetMapping("/ward/{id}")
-	public ModelAndView ward(@PathVariable Integer id){
-		Ward ward = wardService.getWard(id);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("code", ward.getCode());
-		modelAndView.addObject("name", ward.getName());
-		modelAndView.addObject("lg", ward.getLg().getName());
-		modelAndView.addObject("stateConst", ward.getStateConst().getName());
-		modelAndView.addObject("state", ward.getLg().getState().getName());
-		modelAndView.addObject("fedConst", ward.getFedConst().getName());
-		modelAndView.addObject("district", ward.getDistrict().getName());
-		modelAndView.setViewName("ward");
 		return modelAndView;
 	}
 
@@ -115,6 +105,13 @@ public class RegisterController {
 		//PollingUnit pu = puService.findByCode(puService.puToCode(code));
 		PollingUnit pu = puService.findByCode(puService.puToStoredCode(code));
 		if(null!=pu) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User user = userService.findByEmail(auth.getName());
+			user.setPu(pu);
+			userService.saveUser(user);//
+			modelAndView = helpPuSpecify(modelAndView, pu);
+		}
+		/*{
 			modelAndView.addObject("code", code);
 			modelAndView.addObject("puDesc", pu.getDescription());
 			Ward ward = pu.getWard();
@@ -136,11 +133,61 @@ public class RegisterController {
 					}
 				}
 			}
-		}
+		}*/
 		else {
 			modelAndView.addObject("puNotExistsMessage", "The provided polling unit code["+ code+"] does not match any existing Polling Unit in the INEC Database.");
 		}
 		modelAndView.setViewName("/puSpecify");
+		return modelAndView;
+	}
+	
+	public ModelAndView helpPuSpecify(ModelAndView modelAndView, PollingUnit pu) {
+		if(null!=pu) {
+			modelAndView.addObject("code", pu.getPuLocation());
+			modelAndView.addObject("puDesc", pu.getDescription());
+			Ward ward = pu.getWard();
+			if(null!=ward) {
+				modelAndView.addObject("ward", ward.getName());
+				modelAndView.addObject("wardId", ward.getId());
+				StateConstituency stateConst=ward.getStateConst();
+				if(null!=stateConst) modelAndView.addObject("stateConst", stateConst.getName());
+				FedConstituency fedConst=ward.getFedConst();
+				if(null!=fedConst) modelAndView.addObject("fedConst", fedConst.getName());
+				SenatorialDistrict senate=ward.getDistrict();
+				if(null!=senate) modelAndView.addObject("senatorial", senate.getName());
+				LocalGovernment lg = ward.getLg();
+				if(null!=lg) {
+					modelAndView.addObject("lg", lg.getName());
+					State state = lg.getState();
+					if(null!=state) modelAndView.addObject("state", state.getName());
+				}
+			}
+		}
+		
+		return modelAndView;
+	}
+
+	@GetMapping("/ward/{id}")
+	public ModelAndView ward(@PathVariable Integer id){
+		Ward ward = wardService.getWard(id);
+		ModelAndView modelAndView = new ModelAndView();
+		if(null!=ward) {
+			modelAndView.addObject("code", ward.getCode());
+			modelAndView.addObject("name", ward.getName());
+			LocalGovernment lg=ward.getLg();
+			if(null!=lg) {
+				modelAndView.addObject("lg", lg.getName());
+				State state = lg.getState();
+				if(null!=state) modelAndView.addObject("state", state.getName());
+			}
+			StateConstituency stateConst=ward.getStateConst();
+			if(null!=stateConst) modelAndView.addObject("stateConst", stateConst.getName());
+			FedConstituency fedConst=ward.getFedConst();
+			if(null!=fedConst) modelAndView.addObject("fedConst", fedConst.getName());
+			SenatorialDistrict senate=ward.getDistrict();
+			if(null!=senate) modelAndView.addObject("district", senate.getName());
+		}
+		modelAndView.setViewName("ward");
 		return modelAndView;
 	}
 

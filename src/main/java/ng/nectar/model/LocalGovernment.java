@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "localgov")
-public class LocalGovernment implements Constituency{
+public class LocalGovernment implements ConstituencyInterface{
 	
 	public State getState() {
 		return state;

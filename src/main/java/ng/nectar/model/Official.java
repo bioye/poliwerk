@@ -1,15 +1,23 @@
 package ng.nectar.model;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "office_tenure")
 public class Official {
-
-	public Office getCurrentOffice() {
-		if(null!=offices&&offices.size()>0) return offices.get(offices.size()-1);
-		return null;
-	}
+	@ManyToOne
 	private Politician politician;
-	private Party party;
-	private List<Office> offices;
+	@ManyToOne
+	private Tenure tenure;
+	@ManyToOne
+	private Office office;
 	private String name;
+
+	@Id
+	@Column(name = "id")
+	private int id;
 }

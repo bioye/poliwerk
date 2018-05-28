@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ward")
-public class Ward implements Constituency{	
+public class Ward implements ConstituencyInterface{	
 
 	public int getId() {
 		return id;

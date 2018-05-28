@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pollingunit")
-public class PollingUnit implements Constituency {		
+public class PollingUnit implements ConstituencyInterface {		
 	
 	public String getDescription() {
 		return description;

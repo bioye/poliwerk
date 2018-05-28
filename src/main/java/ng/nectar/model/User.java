@@ -5,12 +5,14 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -61,6 +63,16 @@ public class User {
 	private Set<Role> roles;
 	@javax.persistence.Transient
 	private Location location;
+	@ManyToOne(optional=true, fetch = FetchType.LAZY)
+	private PollingUnit pu;
+	
+	public PollingUnit getPu() {
+		return pu;
+	}
+
+	public void setPu(PollingUnit pu) {
+		this.pu = pu;
+	}
 
 	public Location getLocation() {
 		return location;

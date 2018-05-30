@@ -38,7 +38,7 @@ import ng.nectar.service.UserService;
 import ng.nectar.service.WardService;
 
 @Controller
-public class RegisterController {
+public class UserController {
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private UserService userService;
@@ -47,7 +47,7 @@ public class RegisterController {
 	private WardService wardService;
 	
 	@Autowired
-	public RegisterController(BCryptPasswordEncoder bCryptPasswordEncoder,
+	public UserController(BCryptPasswordEncoder bCryptPasswordEncoder,
 			UserService userService, EmailService emailService, PuService puService, WardService wardService) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;

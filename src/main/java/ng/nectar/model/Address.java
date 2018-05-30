@@ -1,17 +1,17 @@
 package ng.nectar.model;
 
 public class Address {
-	String state;
+	//String state;
 	String street;
 	String no;
 	String city;
-	String localGov;
-	public String getState() {
+	LocalGovernment localGov;
+	/*public String getState() {
 		return state;
 	}
 	public void setState(String state) {
 		this.state = state;
-	}
+	}*/
 	public String getStreet() {
 		return street;
 	}
@@ -30,10 +30,10 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getLocalGov() {
+	public LocalGovernment getLocalGov() {
 		return localGov;
 	}
-	public void setLocalGov(String localGov) {
+	public void setLocalGov(LocalGovernment localGov) {
 		this.localGov = localGov;
 	}
 	

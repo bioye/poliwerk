@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableAsync
 //@EnableJpaRepositories("ng.nectar.repository")
-public class UserAccountRegistrationApplication {
+public class PoliworksApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserAccountRegistrationApplication.class, args);
+		SpringApplication.run(PoliworksApplication.class, args);
 	}
 }

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class StateConstituency implements ConstituencyInterface{
 
 	public String getCode() {
-		return id+"";
+		return code;
 	}
 	public String getName() {
 		return name;
@@ -19,7 +19,8 @@ public class StateConstituency implements ConstituencyInterface{
 	@Id
 	@Column(name = "id")
 	private int id;
-	String name;
+	private String code;
+	private String name;
 
 	@ManyToOne
 	State state;

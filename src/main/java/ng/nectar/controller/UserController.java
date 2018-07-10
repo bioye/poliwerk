@@ -13,8 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +42,7 @@ public class UserController {
 	private UserService userService;
 	private EmailService emailService;
 	private PuService puService;
-	private WardService wardService;
+	private WardService wardService;//
 	
 	@Autowired
 	public UserController(BCryptPasswordEncoder bCryptPasswordEncoder,
@@ -167,7 +165,7 @@ public class UserController {
 		return modelAndView;
 	}
 
-	@GetMapping("/ward/{id}")
+	/*@GetMapping("/ward/{id}")
 	public ModelAndView ward(@PathVariable Integer id){
 		Ward ward = wardService.getWard(id);
 		ModelAndView modelAndView = new ModelAndView();
@@ -189,7 +187,7 @@ public class UserController {
 		}
 		modelAndView.setViewName("ward");
 		return modelAndView;
-	}
+	}*/
 
 	@RequestMapping(value="admin/location", method = RequestMethod.GET)
 	public ModelAndView adminLocation(){
@@ -249,7 +247,7 @@ public class UserController {
 		}
 			
 		return modelAndView;
-	}
+	}/*
 	
 	// Process confirmation link
 	@RequestMapping(value="/pu", method = RequestMethod.GET)
@@ -261,7 +259,7 @@ public class UserController {
 			
 		modelAndView.setViewName("pu");
 		return modelAndView;		
-	}
+	}*/
 	
 	// Process confirmation link
 	@RequestMapping(value="/confirm", method = RequestMethod.GET)

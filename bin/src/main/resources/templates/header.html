@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+<!--           <a class="navbar-brand" href="#">nectar</a> -->
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul id='menu' class="nav navbar-nav">
+            <li th:classappend="${module == 'home' ? 'active' : ''}">
+              <a href="#" th:href="@{/}">HOME</a>
+            </li>
+            <li class="menus" th:classappend="${module == 'officials' ? 'active' : ''}">
+              <a href="#" th:href="@{/officials}">OFFICIALS</a>
+	           <ul class="dropdown-content">
+		            <li th:classappend="${module == 'home' ? 'active' : ''}">
+		              <a href="#" th:href="@{/president}">President</a>
+		            </li>
+		            <li th:classappend="${module == 'elections' ? 'active' : ''}">
+		              <a href="#" th:href="@{/senators}">Senators</a>
+		            </li>
+		            <li th:classappend="${module == 'map' ? 'active' : ''}">
+		              <a href="#" th:href="@{/representatives}">Representatives</a>
+		            </li>
+		            <li th:classappend="${module == 'officials' ? 'active' : ''}">
+		              <a href="#" th:href="@{/governors}">Governors</a>
+		            </li>
+		            <li th:classappend="${module == 'search' ? 'active' : ''}">
+		              <a href="#" th:href="@{/honourables}">Honourables</a>
+		            </li>
+		            <li th:classappend="${module == 'search' ? 'active' : ''}">
+		              <a href="#" th:href="@{/chairmen}">Chairmen</a>
+		            </li>
+		            <li th:classappend="${module == 'my_location' ? 'active' : ''}">
+		              <a href="#" th:href="@{/councillors}">Councillors</a>
+		            </li>
+	          </ul>
+            </li>
+            <li th:classappend="${module == 'elections' ? 'active' : ''}">
+              <a href="#" th:href="@{/elections}">ELECTIONS</a>
+            </li>
+            <li th:classappend="${module == 'map' ? 'active' : ''}">
+              <a href="#" th:href="@{/map}">MAP</a>
+            </li>
+            <li th:classappend="${module == 'search' ? 'active' : ''}">
+              <a href="#" th:href="@{/search}">SEARCH</a>
+            </li>
+            <li th:classappend="${module == 'my_location' ? 'active' : ''}">
+              <a href="#" th:href="@{/task}">MY LOCATION</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;register
+              </a>
+            </li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;login
+              </a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+              <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;logout
+              </a>
+             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

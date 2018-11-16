@@ -25,6 +25,6 @@ nbdist/
 .nb-gradle/
 /bin/
 mvnw.*
-mvw*
+mvnw*
 .mvn
 bin

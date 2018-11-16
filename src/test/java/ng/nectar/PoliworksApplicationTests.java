@@ -1,4 +1,4 @@
-package com.codebyamir;
+package ng.nectar;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserAccountRegistrationApplicationTests {
+public class PoliworksApplicationTests {
 
 	@Test
 	public void contextLoads() {

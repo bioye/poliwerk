@@ -134,6 +134,7 @@
                         <phase>package</phase>
                         <goals><goal>copy-dependencies</goal></goals>
                     </execution>
+					<!--
 					<execution>
 						<phase>package</phase>
 						<goals><goal>copy</goal></goals>
@@ -148,6 +149,7 @@
 							</artifactItems>
 						</configuration>
 					</execution>
+					-->
                 </executions>
             </plugin>
 		</plugins>

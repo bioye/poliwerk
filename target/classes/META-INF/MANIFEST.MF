@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: poliverk
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Abioye
+Implementation-Vendor-Id: ng.nectar
+Build-Jdk: 1.8.0_51
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/poliverk
+Created-By: Maven Integration for Eclipse
+

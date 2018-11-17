@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<!-- <head th:replace="header2 :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})"> -->
+<head th:replace="header2 :: head(~{:: title}, ~{:: link})">
+<!-- <head th:replace="header2 :: head"> -->
+	<title>Project Nectar</title>
+  	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<link class="custom-link" rel="icon" href="favicon.ico" />
+	
+	<!-- Bootstrap core CSS -->
+	<link class="custom-link" 
+	  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	  rel="stylesheet"
+	  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	  crossorigin="anonymous" />
+
+	<link  class="custom-link" th:href="@{css/style.css}" rel="stylesheet" />
+</head>
+
+<body class="gray-bg">
+<div>
+
+    <div th:replace="header2 :: header">
+      <!-- ============================================================================ -->
+      <!-- This content is only used for static prototyping purposes (natural templates)-->
+      <!-- and is therefore entirely optional, as this markup fragment will be included -->
+      <!-- from "fragments/header.html" at runtime.                                     -->
+      <!-- ============================================================================ -->
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Static header</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+<div>
+	<hr />
+
+	<h4>What is your Polling unit number?</h4>
+
+	<form th:action="@{/puSpecify}"
+		method="POST" class="m-t" role="form" data-toggle="validator">		
+			
+		<div class="form-group input-group has-feedback"> 
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+			<input type="text" id="puCode" name="puCode" th:placeholder="Polling_Unit" class="form-control" />
+          <span class="glyphicon form-control-feedback"
+            aria-hidden="true"></span>			
+        </div>
+				
+		<button type="submit" class="btn btn-primary block full-width m-b">Continue</button>
+		
+		<div>
+			<b></b><span th:text="${puNotExistsMessage}"></span><br /><br />  
+			<b>Polling Unit Code:</b>
+				<a href="pu.html" th:href="@{/pu(id=${code})}"><span th:text="${code}"></span></a><br /> 
+			<b>Polling Unit Description:</b><span th:text="${puDesc}"></span><br />
+			<b>Ward:</b><a href="ward.html" th:href="@{/ward/{wardId}(wardId=${wardId})}"><span th:text="${ward}"></span></a><br />
+			<b>Local Government:</b> <span th:text="${lg}"></span><br />
+			<b>State Constituency:</b> <span th:text="${stateConst}"></span><br />
+			<b>Federal Constituency:</b> <span th:text="${fedConst}"></span><br />
+			<b>Senatorial District:</b> <span th:text="${senatorial}"></span><br />
+			<b>State:</b><span th:text="${state}"></span>
+		</div>
+		
+	</form>	
+	</div>
+</div>
+	<script>
+    </script>
+</body>
+</html>

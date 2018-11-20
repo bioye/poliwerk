@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-@ImportResource("classpath:application-context.xml")
+@ImportResource("classpath*:application-context.xml")
 public class PoliworksApplication {
 
 	public static void main(String[] args) {

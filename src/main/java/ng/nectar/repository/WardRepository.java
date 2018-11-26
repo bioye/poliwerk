@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import ng.nectar.model.Ward;
 
-
 @Repository("wardRepository")
 public interface WardRepository extends JpaRepository<Ward, Integer> {
 	Ward findByCode(String code);

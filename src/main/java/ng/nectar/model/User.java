@@ -19,10 +19,12 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
+import org.springframework.transaction.annotation.Transactional;
 
 import ng.nectar.model.Role;
 
 @Entity
+@Transactional
 @Table(name = "user")
 public class User {
 

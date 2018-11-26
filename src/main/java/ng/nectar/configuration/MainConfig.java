@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MainConfig {
 
-    @Bean
+   /* @Bean
     public BasicDataSource dataSource() throws URISyntaxException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));//CLEARDB_DATABASE_URL
 
@@ -24,5 +24,5 @@ public class MainConfig {
         basicDataSource.setPassword(password);
 
         return basicDataSource;
-    }
+    }*/
 }

@@ -10,7 +10,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <link rel="icon" href="favicon.ico" />
-<title>Ward</title>
+<title>Politicians</title>
 
 
 <!-- Bootstrap core CSS -->
@@ -29,18 +29,10 @@
 
 	<hr />
 
-	<h4>Ward</h4>
-		
-		<div>
-			<b>Code:</b> <span th:text="${code}"></span><br />
-			<b>Name:</b> <span th:text="${name}"></span><br />
-			<b>Local Government Area:</b> <span th:text="${lg}"></span><br />
-			<b>State Constituency:</b> <span th:text="${stateConst}"></span><br />
-			<b>State:</b> <span th:text="${state}"></span><br />
-			<b>Federal Constituency:</b> <span th:text="${fedConst}"></span><br />
-			<b>Senatorial District:</b> <span th:text="${district}"></span><br />
-			<!-- <b>Councillor:</b> <span th:text="${councillor}"></span> -->
-	<script>
-    </script>
+	<h4>Politicians</h4>
+	
+	<p th:each="politician : ${politicians}"
+       th:text="${politician.name}">Politician's name</p>
+
 </body>
 </html>

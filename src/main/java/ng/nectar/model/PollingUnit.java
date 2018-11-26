@@ -6,7 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
+@Transactional
 @Table(name = "pollingunit")
 public class PollingUnit implements ConstituencyInterface {		
 	
